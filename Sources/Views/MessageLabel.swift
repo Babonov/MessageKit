@@ -164,7 +164,7 @@ open class MessageLabel: UILabel {
             mentionAttributes = attributes
         case .hashtag:
             hashtagAttributes = attributes
-        case .custom(let regex):
+        case .custom(let regex, _):
             customAttributes[regex] = attributes
         }
         if isConfiguring {
@@ -299,7 +299,7 @@ open class MessageLabel: UILabel {
             return mentionAttributes
         case .hashtag:
             return hashtagAttributes
-        case .custom(let regex):
+        case .custom(let regex, _):
             return customAttributes[regex] ?? MessageLabel.defaultAttributes
         }
 
@@ -368,7 +368,7 @@ open class MessageLabel: UILabel {
 
     private func parseForMatches(with detector: DetectorType, in text: NSAttributedString, for range: NSRange) -> [NSTextCheckingResult] {
         switch detector {
-        case .custom(let regex):
+        case .custom(let regex, _):
             return regex.matches(in: text.string, options: [], range: range)
         default:
             fatalError("You must pass a .custom DetectorType")
@@ -495,6 +495,8 @@ open class MessageLabel: UILabel {
                 handleHashtag(match)
             case .mention:
                 handleMention(match)
+            case .custom(_, let url):
+                handleCustom(pattern, match: match, url: url)
             default:
                 handleCustom(pattern, match: match)
             }
@@ -530,8 +532,8 @@ open class MessageLabel: UILabel {
         delegate?.didSelectMention(mention)
     }
 
-    private func handleCustom(_ pattern: String, match: String) {
-        delegate?.didSelectCustom(pattern, match: match)
+    private func handleCustom(_ pattern: String, match: String, url: URL? = nil) {
+        delegate?.didSelectCustom(pattern, match: match, url: url)
     }
 
 }

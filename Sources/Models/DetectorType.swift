@@ -31,7 +31,7 @@ public enum DetectorType: Hashable {
     case phoneNumber
     case url
     case transitInformation
-    case custom(NSRegularExpression)
+    case custom(NSRegularExpression, URL? = nil)
 
     // swiftlint:disable force_try
     public static var hashtag = DetectorType.custom(try! NSRegularExpression(pattern: "#[a-zA-Z0-9]{4,}", options: []))
@@ -70,7 +70,7 @@ public enum DetectorType: Hashable {
         case .phoneNumber: return 2
         case .url: return 3
         case .transitInformation: return 4
-        case .custom(let regex): return regex.hashValue
+        case .custom(let regex, _): return regex.hashValue
         }
     }
 

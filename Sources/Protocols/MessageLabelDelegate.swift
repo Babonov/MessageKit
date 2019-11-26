@@ -74,7 +74,8 @@ public protocol MessageLabelDelegate: AnyObject {
     /// - Parameters:
     ///   - pattern: the pattern of the regular expression
     ///   - match: part that match with the regular expression
-    func didSelectCustom(_ pattern: String, match: String?)
+    ///   - url: optional url for custom detector type
+    func didSelectCustom(_ pattern: String, match: String?, url: URL?)
 
 }
 

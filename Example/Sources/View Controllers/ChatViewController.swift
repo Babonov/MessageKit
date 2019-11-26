@@ -286,7 +286,7 @@ extension ChatViewController: MessageLabelDelegate {
         print("Mention selected: \(mention)")
     }
 
-    func didSelectCustom(_ pattern: String, match: String?) {
+    func didSelectCustom(_ pattern: String, match: String?, url: URL?) {
         print("Custom data detector patter selected: \(pattern)")
     }
 

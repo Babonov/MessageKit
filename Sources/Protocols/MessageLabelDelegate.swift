@@ -95,6 +95,6 @@ public extension MessageLabelDelegate {
 
     func didSelectHashtag(_ hashtag: String) {}
 
-    func didSelectCustom(_ pattern: String, match: String?) {}
+    func didSelectCustom(_ pattern: String, match: String?, url: URL?) {}
 
 }

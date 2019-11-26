@@ -409,7 +409,18 @@ open class MessageLabel: UILabel {
                 rangesForDetectors.updateValue(ranges, forKey: .transitInformation)
             case .regularExpression:
                 guard let text = text, let regex = result.regularExpression, let range = Range(result.range, in: text) else { return }
-                let detector = DetectorType.custom(regex)
+                
+                var detectorUrl: URL? = nil
+                enabledDetectors.forEach {
+                    switch $0 {
+                    case .custom(let regex, let url):
+                        if regex == regex { detectorUrl = url }
+                    default:
+                        break
+                    }
+                }
+                
+                let detector = DetectorType.custom(regex, detectorUrl)
                 var ranges = rangesForDetectors[detector] ?? []
                 let tuple: (NSRange, MessageTextCheckingType) = (result.range, .custom(pattern: regex.pattern, match: String(text[range])))
                 ranges.append(tuple)

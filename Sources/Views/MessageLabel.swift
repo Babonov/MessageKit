@@ -413,8 +413,8 @@ open class MessageLabel: UILabel {
                 var detectorUrl: URL? = nil
                 enabledDetectors.forEach {
                     switch $0 {
-                    case .custom(let regex, let url):
-                        if regex == regex { detectorUrl = url }
+                    case .custom(let customRegex, let customUrl):
+                        if regex == customRegex { detectorUrl = customUrl }
                     default:
                         break
                     }

@@ -27,6 +27,7 @@ import Nimble
 @testable import MessageKit
 
 final class AvatarSpec: QuickSpec {
+    
 
     override func spec() {
         describe("default property values") {
